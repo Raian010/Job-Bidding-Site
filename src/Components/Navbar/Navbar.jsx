@@ -1,17 +1,32 @@
-import { Link } from "react-router-dom";
-
+import { Link, NavLink } from "react-router-dom";
+import { FaHome,FaBriefcase,FaUser,FaDollarSign,FaClock,FaRegistered  } from 'react-icons/fa';
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/Authprovider";
 
 const Navbar = () => {
+   const {user,logout} = useContext(AuthContext);
+
+   const handlelogOut = () => {
+    logout()
+    .then(result => {
+      console.log(result);
+    })
+    .catch(error => console.log(error))
+   }
+
    const links = <>
-   <li><Link to="/">Home</Link></li>
-   <li><Link to="/add">Add job</Link></li>
-   <li><Link to="">My posted jobs</Link></li>
-   <li><Link to="">My Bids</Link></li>
-   <li><Link to="">Bid Requests</Link></li>
+   <li className=" "><Link to="/"><FaHome></FaHome>Home</Link></li>
+   <li className=""><Link to="/add"><FaBriefcase></FaBriefcase>Add job</Link></li>
+   <li className=""><Link to=""><FaUser></FaUser>My posted jobs</Link></li>
+   <li className=""><Link to=""><FaDollarSign></FaDollarSign>My Bids</Link></li>
+   <li className=""><Link to="">
+    <FaClock></FaClock>Bid Requests</Link></li>
+   <li className=""><Link to="/register"><FaRegistered></FaRegistered>
+    Register</Link></li>
    </>
 
     return (
-        <div className="navbar flex py-0 items-center bg-blue-100">
+        <div className="navbar rounded-lg flex shadow-xl items-center bg-base-200">
   <div className="navbar-start">
     <div className="dropdown">
       <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -24,9 +39,9 @@ const Navbar = () => {
     <div>
     <a className="btn btn-ghost normal-case text-xl">
          <span>
-         <img className="w-[120px]" src="https://i.postimg.cc/9fHW6xz9/find-job-logo-icon-design-vector-22742492-1-removebg-preview.png" alt="" /> 
+         <img className="w-[120px] font-bold" src="https://i.postimg.cc/9fHW6xz9/find-job-logo-icon-design-vector-22742492-1-removebg-preview.png" alt="" /> 
         </span>
-        <span>CareerNest</span>
+        <span className="font-semibold">CareerNest</span>
     </a>
  
     </div>
@@ -37,7 +52,27 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end mr-10">
-    <Link to="/login" className="btn btn-primary">Login</Link>
+  {
+            user ?
+            <div className="">
+              <div>
+              <span className="font-bold">
+              {
+              user ?
+               <p className="flex justify-center items-center">
+                <span>
+                  <img className={user.photoURL ? 'hidden md:block lg:h-[50px] rounded-full p-1' : ""} src={user ? user.photoURL : ""} alt="" />
+                  </span>
+                  <span className="mr-2 rounded-lg">{user.email}</span></p> : "" }
+               </span>
+               <Link to="/login"><button onClick={handlelogOut} className="btn btn-neutral ml-20 btn-sm">Logout</button></Link>
+              </div>
+              
+
+               </div> :
+            <NavLink to="/login"><button className="btn btn-primary">Login</button></NavLink>
+            
+          }
   </div>
 </div>
     );
