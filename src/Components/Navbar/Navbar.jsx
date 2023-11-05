@@ -39,9 +39,9 @@ const Navbar = () => {
     <div>
     <a className="btn btn-ghost normal-case text-xl">
          <span>
-         <img className="w-[120px] font-bold" src="https://i.postimg.cc/9fHW6xz9/find-job-logo-icon-design-vector-22742492-1-removebg-preview.png" alt="" /> 
+         <img className="w-[80px] md:w-[120px] hidden md:block font-bold" src="https://i.postimg.cc/9fHW6xz9/find-job-logo-icon-design-vector-22742492-1-removebg-preview.png" alt="" /> 
         </span>
-        <span className="font-semibold">CareerNest</span>
+        <span className="font-semibold mb-20 md:mb-0">CareerNest</span>
     </a>
  
     </div>
@@ -61,9 +61,9 @@ const Navbar = () => {
               user ?
                <p className="flex justify-center items-center">
                 <span>
-                  <img className={user.photoURL ? 'hidden md:block lg:h-[50px] rounded-full p-1' : ""} src={user ? user.photoURL : ""} alt="" />
+                  <img className={user.photoURL ? 'hidden md:block h-[50px] rounded-full p-1' : ""} src={user ? user.photoURL : ""} alt="" />
                   </span>
-                  <span className="mr-2 rounded-lg">{user.email}</span></p> : "" }
+                  <span className="mr-2 ml-16 md:ml-0 rounded-lg">{user.email}</span></p> : "" }
                </span>
                <Link to="/login"><button onClick={handlelogOut} className="btn btn-neutral ml-20 btn-sm">Logout</button></Link>
               </div>

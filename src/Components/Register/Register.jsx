@@ -58,13 +58,13 @@ const Register = () => {
 
   return (
     <div className="mb-10">
-      <div className="min-h-screen flex justify-center gap-10 items-center">
+      <div className="min-h-screen flex flex-col-reverse lg:flex-row justify-center gap-10 items-center">
         <Lottie className="h-[500px]" animationData={animationData}></Lottie>
 
         <div className="shadow-lg rounded-lg w-[400px]">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:text-left">
-              <h2 className="text-2xl font-bold text-center">Register Now!</h2>
+              <h2 className="text-2xl font-bold text-center"><span className="text-pink-400">Register</span> Now!</h2>
               <div className="card mb-5 bg-base-100">
                 <form onSubmit={handleSignup} className="card-body">
                   <div className="form-control">
