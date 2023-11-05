@@ -1,0 +1,29 @@
+[
+    {
+      "id": 1,
+      "name": "John Smith",
+      "occupation": "Software Developer",
+      "headline": "Exceptional Service!",
+      "description": "This job platform is a game-changer! I've found numerous job opportunities and connected with some fantastic employers. Posting job listings is a breeze, and the interface is user-friendly. Highly recommend!",
+      "rating": 5,
+      "image": "https://i.postimg.cc/4yfsHM0Y/james-person-1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Sarah Johnson",
+      "occupation": "Graphic Designer",
+      "headline": "Amazing Creativity",
+      "description": "I can't express how this website has helped me in my job search. It's a one-stop-shop for job seekers and employers. I've landed my dream job through this platform, and it's been a fantastic experience. Thank you!",
+      "rating": 5,
+      "image": "https://i.postimg.cc/TwTZtbJS/Kayla-Person.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Kylie Wilson",
+      "occupation": "Accountant",
+      "headline": "Top-Notch Financial Expert",
+      "description": "This job portal has been a valuable resource in my job hunt. It's easy to navigate, and the job listings are diverse. The only improvement I'd suggest is more filtering options,it's been a great tool for my career.",
+      "rating": 4,
+      "image": "https://i.postimg.cc/zGQdLcB0/W5-HI6-Y4-DINDTNP76-R6-CLA5-IWRU.jpg"
+    }
+  ]
