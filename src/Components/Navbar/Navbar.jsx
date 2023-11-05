@@ -17,7 +17,7 @@ const Navbar = () => {
    const links = <>
    <li className=" "><Link to="/"><FaHome></FaHome>Home</Link></li>
    <li className=""><Link to="/add"><FaBriefcase></FaBriefcase>Add job</Link></li>
-   <li className=""><Link to=""><FaUser></FaUser>My posted jobs</Link></li>
+   <li className=""><Link to="/posted"><FaUser></FaUser>My posted jobs</Link></li>
    <li className=""><Link to=""><FaDollarSign></FaDollarSign>My Bids</Link></li>
    <li className=""><Link to="">
     <FaClock></FaClock>Bid Requests</Link></li>

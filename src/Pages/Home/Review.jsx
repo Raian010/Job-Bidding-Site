@@ -4,9 +4,9 @@ const Review = ({ review }) => {
   console.log(review);
   const { name, occupation, headline, description, rating, image } = review;
   return (
-    <div className="shadow-xl bg-base-200 rounded-lg p-5">
+    <div className="shadow-xl bg-base-200 rounded-lg p-10">
       <div className="flex items-center">
-        <img className="w-[70px] h-[80px] rounded" src={image} alt="" />
+        <img className="w-[70px] h-[80px] rounded-lg" src={image} alt="" />
         <div className="ml-5">
           <h2 className="text-xl font-bold">{name}</h2>
           <h2 className="text-lg font-semibold">{occupation}</h2>
