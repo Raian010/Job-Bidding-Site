@@ -11,7 +11,7 @@ const BidForm = () => {
 
     const ownerData = useLoaderData();
     console.log(ownerData);
-    const {email} = ownerData;
+    const {email,deadline} = ownerData;
 
     const navigate = useNavigate();
 

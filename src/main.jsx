@@ -65,7 +65,8 @@ const router = createBrowserRouter([
       },
       {
         path: "/mybid",
-        element: <MyBidPage></MyBidPage>
+        element: <MyBidPage></MyBidPage>,
+        loader:({params}) => fetch(`http://localhost:5000/bids/${params.email}`)
       },
       {
         path: "/request",

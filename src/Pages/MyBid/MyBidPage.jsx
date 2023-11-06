@@ -1,16 +1,20 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 
 const MyBidPage = () => {
+
  
     const [bids,setBids] = useState([]);
-    const [completedBids,setCompletedBids] = useState([]);
+    console.log(bids);
 
-    
+    useEffect(() => {
+      fetch('http://localhost:5000/bids')
+      .then(res => res.json())
+      .then(data => setBids(data))
+    },[])
 
     return (
         <div className="min-h-[80vh] mt-10">
-            <h2>This is my Bid Page</h2>
+            <h2>This is my Bid Page{bids.length}</h2>
             <div className="overflow-x-auto">
   <table className="table">
     {/* head */}
