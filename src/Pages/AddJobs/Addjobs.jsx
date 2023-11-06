@@ -48,6 +48,7 @@ const Addjobs = () => {
         <input
           type="text"
           name="email"
+          disabled
           defaultValue={user?.email}
           placeholder="Email"
           className="input input-bordered w-1/2"

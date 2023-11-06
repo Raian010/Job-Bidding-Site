@@ -62,6 +62,7 @@ const BidForm = () => {
           <input
             type="text"
             name="email"
+            disabled
             defaultValue={user?.email}
             placeholder="Email"
             className="input input-bordered w-1/2"
@@ -70,6 +71,7 @@ const BidForm = () => {
           <input
             type="text"
             name="buyer"
+            disabled
             defaultValue={email}
             placeholder="Buyer Email"
             className="input input-bordered w-1/2"

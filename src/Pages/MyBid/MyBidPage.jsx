@@ -1,6 +1,13 @@
+import { useState } from "react";
 
 
 const MyBidPage = () => {
+ 
+    const [bids,setBids] = useState([]);
+    const [completedBids,setCompletedBids] = useState([]);
+
+    
+
     return (
         <div className="min-h-[80vh] mt-10">
             <h2>This is my Bid Page</h2>

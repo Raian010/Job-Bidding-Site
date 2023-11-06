@@ -20,6 +20,7 @@ import Details from './Pages/Home/Details';
 import { element } from 'prop-types';
 import BidForm from './Pages/BidForm/BidForm';
 import MyBidPage from './Pages/MyBid/MyBidPage';
+import BidRequest from './Pages/BidRequest/BidRequest';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,11 @@ const router = createBrowserRouter([
       {
         path: "/mybid",
         element: <MyBidPage></MyBidPage>
+      },
+      {
+        path: "/request",
+        element: <BidRequest></BidRequest>,
+        loader: () => fetch('http://localhost:5000/bids')
       }
 
     ]
