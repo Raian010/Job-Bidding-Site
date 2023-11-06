@@ -19,13 +19,14 @@ const BidForm = () => {
         e.preventDefault();
         const form = e.target;
         const price = form.price.value;
-        const deadline = form.deadline.value;
+        const deadline = ownerData.deadline;
         const email =  user?.email
         const buyer = ownerData.email;
+        const job = ownerData.job;
 
         form.reset();
 
-        const userBid = {price,deadline,email,buyer};
+        const userBid = {job,price,deadline,email,buyer};
         axios.post("http://localhost:5000/bids",userBid)
         .then(res => {
           const result = res.data
@@ -53,7 +54,7 @@ const BidForm = () => {
           <input
             type="date"
             name="deadline"
-            // defaultValue={deadline}
+            defaultValue={deadline}
             placeholder="Deadline"
             className="input input-bordered w-1/2"
           />

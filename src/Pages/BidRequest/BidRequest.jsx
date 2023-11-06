@@ -20,60 +20,44 @@ const BidRequest = () => {
     },[url])
 
     return (
-        <div className="min-h-[80vh] mt-10">
-            <h2>This is bid request page
-                There is {ownerAddedJobs.length} jobs
-            </h2>
-            <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-       
-        <th>Job Title</th>
-        <th>Email</th>
-        <th>Deadline</th>
-        <th>Price</th>
-        <th>status</th>
-        <th>Accept</th>
-        <th>Reject</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        ownerAddedJobs.map(ownerAddedJob => <tr key={ownerAddedJob._id}>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
-            <td>
-              <div className="flex items-center space-x-3">
-                
-                <div>
-                  <div className="font-bold">{ownerAddedJob.job}</div>
-                  <div className="text-sm opacity-50">United States</div>
-                </div>
-              </div>
-            </td>
-            <td>
-              Zemlak, Daniel and Leannon
-              <br/>
-              <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-            </td>
-            <td>Purple</td>
-            <th>
-              <button className="btn btn-ghost btn-xs">details</button>
-            </th>
-          </tr>)
-      }
-      
-    </tbody>
-   
-    
-  </table>
-</div>
-        </div>
+      <div className="min-h-[80vh] mt-10">
+      <h2>This is my Bid Page {ownerAddedJobs.length}</h2>
+      <div className="overflow-x-auto">
+        <table className="table">
+          <thead>
+            <tr>
+              <th className="text-xl text-black font-bold">Job Title</th>
+              <th className="text-xl text-black font-bold">Email</th>
+              <th className="text-xl text-black font-bold">Deadline</th>
+              <th className="text-xl text-black font-bold">Price</th>
+              <th className="text-xl text-black font-bold">Status</th>
+              <th className="text-xl text-black font-bold">Accept</th>
+              <th className="text-xl text-black font-bold">Reject</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ownerAddedJobs.map(job => (
+              <tr key={job._id}>
+                <td className="font-medium">
+                  {job.job}
+                  
+                </td>
+                <td className="font-medium">{job.email}</td>
+                <td className="font-medium">
+                  {job.deadline}
+                </td>
+                <td className="font-medium">
+                  {job.price}
+                </td>
+                <td className="font-medium">pending</td>
+                <td className="font-medium"><button className="btn bg-green-500">Accept</button></td>
+                <td className="font-medium"><button className="btn bg-red-500">Reject</button></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
     );
 };
 
