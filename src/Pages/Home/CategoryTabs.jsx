@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 const CategoryTabs = () => {
+
 
     const [selectCategory,setSelectCategory] = useState("Web Development");
     const [categories,setCategories] = useState([]);
@@ -37,7 +39,7 @@ const CategoryTabs = () => {
               <p className="font-medium h-[192px]">{item.description}</p> 
              
               <div className="card-actions justify-end">
-                <button className="btn btn-primary">Bid Now</button>
+                <Link to={`/details/${item._id}`} className="btn btn-primary">Bid Now</Link>
               </div>
             </div>
           </div>

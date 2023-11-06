@@ -1,7 +1,7 @@
-import axios from 'axios';
+
 import  { FaTrash  } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
+
 
 
 const PostedJob = ({postedJob,handleDelete}) => {
@@ -14,8 +14,8 @@ const PostedJob = ({postedJob,handleDelete}) => {
     return (
         <div className="card bg-base-100 shadow-xl">
   <div className="card-body">
-    <h2 className="card-title text-xl font-bold">{job}</h2>
-    <p className="text-base font-medium">{description} </p>
+    <h2 className="card-title text-xl h-[52px] font-bold">{job}</h2>
+    <p className="text-base font-medium h-[192px]">{description} </p>
     <p className="text-base font-medium">{category}</p>
     <p className="text-base font-medium">{deadline}</p>
     <div className="flex justify-between">

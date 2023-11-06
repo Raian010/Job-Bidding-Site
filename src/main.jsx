@@ -16,6 +16,9 @@ import Addjobs from './Pages/AddJobs/Addjobs';
 import MypostedJobs from './Pages/Myposted/MypostedJobs';
 import Update from './Pages/Update/Update';
 import PrivateRoute from './Private/PrivateRoute';
+import Details from './Pages/Home/Details';
+import { element } from 'prop-types';
+import BidForm from './Pages/BidForm/BidForm';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,16 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <Update></Update>,
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: "/details/:id",
+        element: <Details></Details>,
+        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: "/bidform/:id",
+      element:<BidForm></BidForm>,
+      loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       }
 
     ]
