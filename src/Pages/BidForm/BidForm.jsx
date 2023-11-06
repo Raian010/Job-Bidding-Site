@@ -1,6 +1,8 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/Authprovider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const BidForm = () => {
@@ -11,6 +13,8 @@ const BidForm = () => {
     console.log(ownerData);
     const {email} = ownerData;
 
+    const navigate = useNavigate();
+
     const handleBid = e => {
         e.preventDefault();
         const form = e.target;
@@ -19,7 +23,19 @@ const BidForm = () => {
         const email =  user?.email
         const buyer = ownerData.email;
 
-        const userBid = {price,deadline,email,buyer}
+        form.reset();
+
+        const userBid = {price,deadline,email,buyer};
+        axios.post("http://localhost:5000/bids",userBid)
+        .then(res => {
+          const result = res.data
+          console.log(result);
+          if(result.insertedId){
+              Swal.fire("Success!", "You successfully added a job", "success");
+             
+          }
+          navigate("/mybid")
+        })
     }
     return (
         <div className="my-10 min-h-[80vh]">

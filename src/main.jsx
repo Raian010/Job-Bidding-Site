@@ -19,6 +19,7 @@ import PrivateRoute from './Private/PrivateRoute';
 import Details from './Pages/Home/Details';
 import { element } from 'prop-types';
 import BidForm from './Pages/BidForm/BidForm';
+import MyBidPage from './Pages/MyBid/MyBidPage';
 
 const router = createBrowserRouter([
   {
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
         path: "/bidform/:id",
       element:<BidForm></BidForm>,
       loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+      },
+      {
+        path: "/mybid",
+        element: <MyBidPage></MyBidPage>
       }
 
     ]
