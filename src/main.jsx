@@ -15,6 +15,7 @@ import Register from './Components/Register/Register';
 import Addjobs from './Pages/AddJobs/Addjobs';
 import MypostedJobs from './Pages/Myposted/MypostedJobs';
 import Update from './Pages/Update/Update';
+import PrivateRoute from './Private/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/posted",
-        element: <MypostedJobs></MypostedJobs>
+        element: <PrivateRoute><MypostedJobs></MypostedJobs></PrivateRoute>
       },
       {
         path: "/update/:id",
