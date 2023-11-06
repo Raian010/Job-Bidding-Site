@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 const MyBidPage = () => {
   const [bids, setBids] = useState([]);
 
+ 
+
+  const [status,setStatus] = useState("pending");
+
   useEffect(() => {
     fetch('http://localhost:5000/bids')
       .then(res => res.json())
@@ -34,7 +38,7 @@ const MyBidPage = () => {
                 <td className="font-medium">
                   {bid.deadline}
                 </td>
-                <td className="font-medium">pending</td>
+                <td className="font-medium">{status}</td>
                 <td className="font-medium">Complete Button</td>
               </tr>
             ))}

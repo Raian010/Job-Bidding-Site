@@ -42,7 +42,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/add",
-        element: <Addjobs></Addjobs>
+        element: <PrivateRoute><Addjobs></Addjobs></PrivateRoute>
       },
       {
         path: "/posted",
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <Details></Details>,
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
       },
       {
@@ -65,12 +65,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/mybid",
-        element: <MyBidPage></MyBidPage>,
+        element: <PrivateRoute><MyBidPage></MyBidPage></PrivateRoute>,
         loader:({params}) => fetch(`http://localhost:5000/bids/${params.email}`)
       },
       {
         path: "/request",
-        element: <BidRequest></BidRequest>,
+        element: <PrivateRoute><BidRequest></BidRequest></PrivateRoute>,
         loader: () => fetch('http://localhost:5000/bids')
       }
 

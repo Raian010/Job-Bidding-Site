@@ -19,6 +19,37 @@ const BidRequest = () => {
         .then(data => setOwnerAddedJobs(data))
     },[url])
 
+    const [status,setStatus] = useState("pending");
+    // const [visible,setVisible] = useState(true); 
+
+     const handleStatus = (_id) => {
+    fetch(
+      `http://localhost:5000/bids/${_id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ status: "confirm" }),
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+        
+          // setStatus("in progress");
+          // setVisible(false);
+          const remaining = ownerAddedJobs.filter((job) => job._id !== _id);
+          const updated = ownerAddedJobs.find((job) => job._id == _id);
+          updated.status = "confirm";
+          const newUpdated = [updated, ...remaining];
+          setOwnerAddedJobs(newUpdated);
+        }
+      });
+  };
+
+
     return (
       <div className="min-h-[80vh] mt-10">
       <h2>This is my Bid Page {ownerAddedJobs.length}</h2>
@@ -49,8 +80,8 @@ const BidRequest = () => {
                 <td className="font-medium">
                   {job.price}
                 </td>
-                <td className="font-medium">pending</td>
-                <td className="font-medium"><button className="btn bg-green-500">Accept</button></td>
+                <td className="font-medium">{status}</td>
+                <td className="font-medium"><button onClick={() => handleStatus(job._id)}>Accept</button></td>
                 <td className="font-medium"><button className="btn bg-red-500">Reject</button></td>
               </tr>
             ))}
