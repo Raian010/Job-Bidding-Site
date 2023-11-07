@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Skelton from "../../Components/Skelton/Skelton"
+// import Skelton from "../../Components/Skelton/Skelton"
 
 const CategoryTabs = () => {
   const [selectCategory, setSelectCategory] = useState("Web Development");
@@ -38,7 +38,7 @@ const CategoryTabs = () => {
       </div>
 
       <div className="category-content mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-        {isLoading ? ( <Skelton/> )
+        {isLoading ? ( <span className="loading loading-infinity loading-lg"></span> )
         : (categories
           ? categories.map((item) => {
               if (selectCategory === item.category) {

@@ -5,15 +5,20 @@ const MyBidPage = () => {
 
   const [status, setStatus] = useState("pending");
 
+  const [isLoading,setIsLoading] = useState(true);
+
   useEffect(() => {
     fetch("https://assignment-react-server.vercel.app/bids")
       .then((res) => res.json())
       .then((data) => setBids(data));
+      setIsLoading(false)
   }, []);
 
   return (
     <div className="min-h-[80vh] mt-10">
-      <h2>This is my Bid Page {bids.length}</h2>
+      <h2 className="text-4xl text-center font-bold mb-10">
+        My <span className="text-blue-600">Bid</span>
+      </h2>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -26,7 +31,7 @@ const MyBidPage = () => {
             </tr>
           </thead>
           <tbody>
-            {bids.map((bid) => (
+            {isLoading ? (<span className="loading loading-infinity loading-lg"></span>) :(bids ? bids.map((bid) => (
               <tr key={bid._id}>
                 <td className="font-medium">{bid.job}</td>
                 <td className="font-medium">{bid.email}</td>
@@ -34,7 +39,7 @@ const MyBidPage = () => {
                 <td className="font-medium">{status}</td>
                 <td className="font-medium">Complete Button</td>
               </tr>
-            ))}
+            )) : <p>There is no data</p>)}
           </tbody>
         </table>
       </div>

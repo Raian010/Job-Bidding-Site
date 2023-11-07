@@ -10,7 +10,7 @@ const PrivateRoute = ({children}) => {
 
 
     if(isLoading){
-        return <Skelton></Skelton>;
+        return <span className="loading loading-spinner loading-lg"></span>;
     }
     if(user?.email){
         return children;

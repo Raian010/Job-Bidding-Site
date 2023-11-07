@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Provider/Authprovider";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { signUp } = useContext(AuthContext);
@@ -121,6 +122,14 @@ const Register = () => {
                       value="Register"
                       className="btn btn-primary"
                     />
+                  </div>
+                  <div className="mt-2">
+                  <p className="text-center">
+              <span className="mr-2">Already have an account?</span>
+              <Link className="text-blue-800 text-lg font-bold" to="/login">
+                Login
+              </Link>
+            </p>
                   </div>
                   <p className="text-red-500 text-center font-semibold">
               {handleError}

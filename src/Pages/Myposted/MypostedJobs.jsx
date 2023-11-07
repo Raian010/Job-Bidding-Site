@@ -36,22 +36,25 @@ const MypostedJobs = () => {
     });
   };
 
+  const [isLoading,setIsLoading] = useState(true);
+
   const url = `https://assignment-react-server.vercel.app/jobs?email=${user.email}`;
 
   useEffect(() => {
     axios.get(url).then((res) => {
       console.log(res.data);
       setPostedJobs(res.data);
+      setIsLoading(false)
     });
   }, [url]);
 
   return (
     <div className="my-10">
-      <h2>This is what i posted in last minute</h2>
-      <h3>{postedJobs.length}</h3>
-
+        <h2 className="text-4xl text-center font-bold mb-10">
+        My Posted <span className="text-blue-600">Jobs</span>
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {postedJobs ? (
+        { isLoading ? (<span className="loading loading-infinity loading-lg"></span>) : (postedJobs ? 
           postedJobs.map((postedJob) => (
             <PostedJob
               key={postedJob._id}
@@ -59,9 +62,9 @@ const MypostedJobs = () => {
               postedJob={postedJob}
             ></PostedJob>
           ))
-        ) : (
-          <p>There is no data</p>
-        )}
+         : 
+          <p>There is no data</p>)
+        }
       </div>
     </div>
   );

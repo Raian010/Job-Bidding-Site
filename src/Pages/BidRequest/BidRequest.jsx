@@ -9,12 +9,15 @@ const BidRequest = () => {
   console.log(data);
 
   const [ownerAddedJobs, setOwnerAddedJobs] = useState([]);
+  
+  const [isLoading,setIsLoading] = useState(true);
 
   const url = `https://assignment-react-server.vercel.app/bids?email=${buyer}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => setOwnerAddedJobs(data));
+      setIsLoading(false)
   }, [url]);
 
   const [status, setStatus] = useState("pending");
@@ -45,7 +48,9 @@ const BidRequest = () => {
 
   return (
     <div className="min-h-[80vh] mt-10">
-      <h2>This is my Bid Page {ownerAddedJobs.length}</h2>
+      <h2 className="text-4xl text-center font-bold mb-10">
+        Bid <span className="text-blue-600">Request</span>
+      </h2>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>
@@ -60,7 +65,7 @@ const BidRequest = () => {
             </tr>
           </thead>
           <tbody>
-            {ownerAddedJobs.map((job) => (
+            {isLoading ? (<span className="loading loading-infinity loading-lg"></span>) :(ownerAddedJobs ? ownerAddedJobs.map((job) => (
               <tr key={job._id}>
                 <td className="font-medium">{job.job}</td>
                 <td className="font-medium">{job.email}</td>
@@ -74,7 +79,7 @@ const BidRequest = () => {
                   <button className="btn bg-red-500">Reject</button>
                 </td>
               </tr>
-            ))}
+            )) : <p>There is no data</p>)}
           </tbody>
         </table>
       </div>
