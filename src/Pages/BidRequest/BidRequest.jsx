@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const BidRequest = () => {
   const datas = useLoaderData();
@@ -29,25 +30,52 @@ const BidRequest = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ status: "confirm" }),
+      body: JSON.stringify({ status: "in progress" }),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.modifiedCount > 0) {
-          // setStatus("in progress");
-          // setVisible(false);
+          
           const remaining = ownerAddedJobs.filter((job) => job._id !== _id);
           const updated = ownerAddedJobs.find((job) => job._id == _id);
-          updated.status = "confirm";
+          updated.status = "in progress";
           const newUpdated = [updated, ...remaining];
           setOwnerAddedJobs(newUpdated);
         }
       });
   };
 
+  const handleDelete = (_id) => {
+    console.log(_id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.deletedCount > 0) {
+              Swal.fire("Rejected!", "This bid has been rejected.", "success");
+              const remaining = ownerAddedJobs.filter((cart) => cart._id !== _id);
+              setOwnerAddedJobs(remaining);
+            }
+          });
+      }
+    });
+  };
+
   return (
-    <div className="min-h-[80vh] mt-10">
+    <div className="min-h-screen mt-10">
       <h2 className="text-4xl text-center font-bold mb-10">
         Bid <span className="text-blue-600">Request</span>
       </h2>
@@ -71,12 +99,20 @@ const BidRequest = () => {
                 <td className="font-medium">{job.email}</td>
                 <td className="font-medium">{job.deadline}</td>
                 <td className="font-medium">{job.price}</td>
-                <td className="font-medium">{status}</td>
+                <td className="font-medium">{job.status === 'in progress' ? <span className="text-xl font-bold text-blue-500">in progress</span> : "pending"}</td>
                 <td className="font-medium">
-                  <button onClick={() => handleStatus(job._id)}>Accept</button>
+                {job.status === 'in progress' ? (
+    <span className="loading loading-infinity loading-lg"></span>
+  ) : (
+    <button onClick={() => handleStatus(job._id)} className="btn bg-green-500">Accept</button>
+  )}
                 </td>
                 <td className="font-medium">
-                  <button className="btn bg-red-500">Reject</button>
+                  {job.status === 'in progress' ? (
+    <span className="loading loading-infinity loading-lg"></span>
+  ) : (
+    <button onClick={() => handleDelete(job._id)} className="btn bg-red-500">Reject</button>
+  )}
                 </td>
               </tr>
             )) : <p>There is no data</p>)}

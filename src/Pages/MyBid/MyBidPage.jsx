@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 const MyBidPage = () => {
   const [bids, setBids] = useState([]);
+  console.log(bids);
 
   const [status, setStatus] = useState("pending");
 
@@ -13,6 +14,28 @@ const MyBidPage = () => {
       .then((data) => setBids(data));
       setIsLoading(false)
   }, []);
+
+  const handleStatus = (_id) => {
+    fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "complete" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          
+          const remaining = bids.filter((job) => job._id !== _id);
+          const updated = bids.find((job) => job._id == _id);
+          updated.status = "complete";
+          const newUpdated = [updated, ...remaining];
+          setBids(newUpdated);
+        }
+      });
+  };
 
   return (
     <div className="min-h-[80vh] mt-10">
@@ -36,8 +59,14 @@ const MyBidPage = () => {
                 <td className="font-medium">{bid.job}</td>
                 <td className="font-medium">{bid.email}</td>
                 <td className="font-medium">{bid.deadline}</td>
-                <td className="font-medium">{status}</td>
-                <td className="font-medium">Complete Button</td>
+                <td className="font-medium">{bid.status === 'complete' ? <span className="text-xl font-bold text-blue-500">complete</span> : "in progress"}</td>
+                <td className="font-medium">
+  {bid.status === 'in progress' ? (
+    <button onClick={() => handleStatus(bid._id)} className="btn btn-primary">Complete</button>
+  ) : (
+    <button className="btn btn-primary" disabled>Complete</button>
+  )}
+</td>
               </tr>
             )) : <p>There is no data</p>)}
           </tbody>

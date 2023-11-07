@@ -56,9 +56,7 @@ const router = createBrowserRouter([
         path: "/update/:id",
         element: <Update></Update>,
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
-          ),
+          fetch(`https://assignment-react-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/details/:id",
@@ -68,17 +66,13 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
-          ),
+          fetch(`https://assignment-react-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/bidform/:id",
         element: <BidForm></BidForm>,
         loader: ({ params }) =>
-          fetch(
-            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
-          ),
+          fetch(`https://assignment-react-server.vercel.app/jobs/${params.id}`),
       },
       {
         path: "/mybid",
@@ -89,7 +83,7 @@ const router = createBrowserRouter([
         ),
         loader: ({ params }) =>
           fetch(
-            `https://assignment-react-server-raians-projects.vercel.app/bids/${params.email}`
+            `https://assignment-react-server.vercel.app/bids/${params.email}`
           ),
       },
       {
@@ -99,11 +93,7 @@ const router = createBrowserRouter([
             <BidRequest></BidRequest>
           </PrivateRoute>
         ),
-        loader: () =>
-          fetch(
-            "https://assignment-react-server-raians-projects.vercel.app/bids"
-          ),
-          
+        loader: () => fetch("https://assignment-react-server.vercel.app/bids"),
       },
     ],
   },
