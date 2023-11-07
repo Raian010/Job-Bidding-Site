@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/Authprovider";
 import { Navigate, useLocation } from "react-router-dom";
+import Skelton from "../Components/Skelton/Skelton";
 
 
 const PrivateRoute = ({children}) => {
@@ -9,10 +10,10 @@ const PrivateRoute = ({children}) => {
 
 
     if(isLoading){
-        return <p><span className="loading loading-spinner loading-lg"></span></p>
+        return <Skelton></Skelton>;
     }
     if(user?.email){
-        return children
+        return children;
     }
     return  <Navigate state={location.pathname} to="/login"></Navigate>
 };

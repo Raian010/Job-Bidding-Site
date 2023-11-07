@@ -1,26 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import Authprovider from './Provider/Authprovider';
-import Login from './Components/Login/Login';
-import Main from './Pages/Main/Main';
-import ErrorPage from './Pages/Errorpage/ErrorPage';
-import Home from './Pages/Home/Home';
-import Register from './Components/Register/Register';
-import Addjobs from './Pages/AddJobs/Addjobs';
-import MypostedJobs from './Pages/Myposted/MypostedJobs';
-import Update from './Pages/Update/Update';
-import PrivateRoute from './Private/PrivateRoute';
-import Details from './Pages/Home/Details';
-import { element } from 'prop-types';
-import BidForm from './Pages/BidForm/BidForm';
-import MyBidPage from './Pages/MyBid/MyBidPage';
-import BidRequest from './Pages/BidRequest/BidRequest';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Authprovider from "./Provider/Authprovider";
+import Login from "./Components/Login/Login";
+import Main from "./Pages/Main/Main";
+import ErrorPage from "./Pages/Errorpage/ErrorPage";
+import Home from "./Pages/Home/Home";
+import Register from "./Components/Register/Register";
+import Addjobs from "./Pages/AddJobs/Addjobs";
+import MypostedJobs from "./Pages/Myposted/MypostedJobs";
+import Update from "./Pages/Update/Update";
+import PrivateRoute from "./Private/PrivateRoute";
+import Details from "./Pages/Home/Details";
+import BidForm from "./Pages/BidForm/BidForm";
+import MyBidPage from "./Pages/MyBid/MyBidPage";
+import BidRequest from "./Pages/BidRequest/BidRequest";
 
 const router = createBrowserRouter([
   {
@@ -30,58 +26,93 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/register",
-        element: <Register></Register>
+        element: <Register></Register>,
       },
       {
         path: "/add",
-        element: <PrivateRoute><Addjobs></Addjobs></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Addjobs></Addjobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/posted",
-        element: <PrivateRoute><MypostedJobs></MypostedJobs></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <MypostedJobs></MypostedJobs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update/:id",
         element: <Update></Update>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        loader: ({ params }) =>
+          fetch(
+            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
+          ),
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute><Details></Details></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        element: (
+          <PrivateRoute>
+            <Details></Details>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
+          ),
       },
       {
         path: "/bidform/:id",
-      element:<BidForm></BidForm>,
-      loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`)
+        element: <BidForm></BidForm>,
+        loader: ({ params }) =>
+          fetch(
+            `https://assignment-react-server-raians-projects.vercel.app/jobs/${params.id}`
+          ),
       },
       {
         path: "/mybid",
-        element: <PrivateRoute><MyBidPage></MyBidPage></PrivateRoute>,
-        loader:({params}) => fetch(`http://localhost:5000/bids/${params.email}`)
+        element: (
+          <PrivateRoute>
+            <MyBidPage></MyBidPage>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://assignment-react-server-raians-projects.vercel.app/bids/${params.email}`
+          ),
       },
       {
         path: "/request",
-        element: <PrivateRoute><BidRequest></BidRequest></PrivateRoute>,
-        loader: () => fetch('http://localhost:5000/bids')
-      }
-
-    ]
+        element: (
+          <PrivateRoute>
+            <BidRequest></BidRequest>
+          </PrivateRoute>
+        ),
+        loader: () =>
+          fetch(
+            "https://assignment-react-server-raians-projects.vercel.app/bids"
+          ),
+          
+      },
+    ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Authprovider>
-    <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router}></RouterProvider>
     </Authprovider>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);
