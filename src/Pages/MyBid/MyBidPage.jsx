@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaSign } from "react-icons/fa";
 
 const MyBidPage = () => {
   const [bids, setBids] = useState([]);
@@ -21,7 +22,7 @@ const MyBidPage = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ status: "complete" }),
+      body: JSON.stringify({ status: "completed" }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -30,7 +31,7 @@ const MyBidPage = () => {
           
           const remaining = bids.filter((job) => job._id !== _id);
           const updated = bids.find((job) => job._id == _id);
-          updated.status = "complete";
+          updated.status = "completed";
           const newUpdated = [updated, ...remaining];
           setBids(newUpdated);
         }
@@ -59,12 +60,12 @@ const MyBidPage = () => {
                 <td className="font-medium">{bid.job}</td>
                 <td className="font-medium">{bid.email}</td>
                 <td className="font-medium">{bid.deadline}</td>
-                <td className="font-medium">{bid.status === 'complete' ? <span className="text-xl font-bold text-blue-500">complete</span> : "in progress"}</td>
+                <td className="font-medium">{bid.status === 'in progress' ? <span className="text-xl font-bold text-blue-500">in progress</span> : bid.status === "completed" ? (<span className="text-xl font-bold text-green-500">completed</span>) : bid.status === "rejected" ? (<span className="text-xl font-bold text-red-500">rejected</span>) : "pending"}</td>
                 <td className="font-medium">
   {bid.status === 'in progress' ? (
-    <button onClick={() => handleStatus(bid._id)} className="btn btn-primary">Complete</button>
+    <button onClick={() => handleStatus(bid._id)} className={`btn btn-primary`}>Complete</button>
   ) : (
-    <button className="btn btn-primary" disabled>Complete</button>
+    <button className={`btn btn-primary ${bid.status === 'completed' ? "hidden" : "block"}`} disabled>Complete</button>
   )}
 </td>
               </tr>

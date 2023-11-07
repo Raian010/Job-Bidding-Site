@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
+
 import { useLoaderData } from "react-router-dom";
-import Swal from "sweetalert2";
+
 
 const BidRequest = () => {
   const datas = useLoaderData();
   const data = datas[0];
-  const { buyer } = data;
+  const { buyer,email } = data;
   console.log(data);
 
   const [ownerAddedJobs, setOwnerAddedJobs] = useState([]);
@@ -21,10 +22,8 @@ const BidRequest = () => {
       setIsLoading(false)
   }, [url]);
 
-  const [status, setStatus] = useState("pending");
-  // const [visible,setVisible] = useState(true);
 
-  const handleStatus = (_id) => {
+  const handleAccept = (_id) => {
     fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
       method: "PATCH",
       headers: {
@@ -46,32 +45,26 @@ const BidRequest = () => {
       });
   };
 
-  const handleDelete = (_id) => {
-    console.log(_id);
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-            if (data.deletedCount > 0) {
-              Swal.fire("Rejected!", "This bid has been rejected.", "success");
-              const remaining = ownerAddedJobs.filter((cart) => cart._id !== _id);
-              setOwnerAddedJobs(remaining);
-            }
-          });
-      }
-    });
+  const handleReject = (_id) => {
+    fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "rejected" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          
+          const remaining = ownerAddedJobs.filter((job) => job._id !== _id);
+          const updated = ownerAddedJobs.find((job) => job._id == _id);
+          updated.status = "rejected";
+          const newUpdated = [updated, ...remaining];
+          setOwnerAddedJobs(newUpdated);
+        }
+      });
   };
 
   return (
@@ -99,19 +92,19 @@ const BidRequest = () => {
                 <td className="font-medium">{job.email}</td>
                 <td className="font-medium">{job.deadline}</td>
                 <td className="font-medium">{job.price}</td>
-                <td className="font-medium">{job.status === 'in progress' ? <span className="text-xl font-bold text-blue-500">in progress</span> : "pending"}</td>
+                <td className="font-medium">{job.status === 'in progress' ? <span className="text-xl font-bold text-blue-500">in progress</span> : job.status === "completed" ? (<span className="text-xl font-bold text-green-500">completed</span>) : job.status === "rejected" ? (<span className="text-xl font-bold text-red-500">rejected</span>) : "pending"}</td>
                 <td className="font-medium">
                 {job.status === 'in progress' ? (
-    <span className="loading loading-infinity loading-lg"></span>
-  ) : (
-    <button onClick={() => handleStatus(job._id)} className="btn bg-green-500">Accept</button>
+    <progress className="progress progress-success w-56" value={50} max="100"></progress>
+  ) : job.status === 'completed' ? (<progress className="progress progress-success w-56" value={100} max="100"></progress>) : job.status === 'rejected' ? <progress className="progress progress-success w-56" value={0} max="100"></progress> :  (
+    <button onClick={() => handleAccept(job._id)} className="btn bg-green-500">Accept</button>
   )}
                 </td>
                 <td className="font-medium">
                   {job.status === 'in progress' ? (
-    <span className="loading loading-infinity loading-lg"></span>
-  ) : (
-    <button onClick={() => handleDelete(job._id)} className="btn bg-red-500">Reject</button>
+    <span className="text-4xl font-bold text-red-500">X</span>
+  ) : job.status === 'completed' ? (<span className="text-4xl font-bold text-red-500">X</span>) : job.status === 'rejected' ? <span className="text-4xl font-bold text-red-500">X</span> :  (
+    <button onClick={() => handleReject(job._id)} className="btn bg-red-500">Reject</button>
   )}
                 </td>
               </tr>
