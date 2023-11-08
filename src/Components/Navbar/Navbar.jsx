@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { FaHome,FaBriefcase,FaUser,FaDollarSign,FaClock,FaRegistered  } from 'react-icons/fa';
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/Authprovider";
+import axios from "axios";
 
 const Navbar = () => {
    const {user,logout} = useContext(AuthContext);

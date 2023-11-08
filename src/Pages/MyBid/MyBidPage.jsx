@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
-import { FaSign } from "react-icons/fa";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Provider/Authprovider";
+
 
 const MyBidPage = () => {
   const [bids, setBids] = useState([]);
   console.log(bids);
 
-  const [status, setStatus] = useState("pending");
+  const {user} = useContext(AuthContext);
+
+  
 
   const [isLoading,setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://assignment-react-server.vercel.app/bids")
+    fetch(`https://assignment-react-server.vercel.app/bids/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setBids(data));
       setIsLoading(false)
-  }, []);
+  }, [user?.email]);
 
   const handleStatus = (_id) => {
     fetch(`https://assignment-react-server.vercel.app/bids/${_id}`, {
@@ -39,10 +42,11 @@ const MyBidPage = () => {
   };
 
   return (
-    <div className="min-h-[80vh] mt-10">
+    <div className="min-h-screen mt-10">
       <h2 className="text-4xl text-center font-bold mb-10">
         My <span className="text-blue-600">Bid</span>
       </h2>
+      <h2 className="text-2xl mb-3 ml-3 font-bold">Total Bids: {bids.length}</h2>
       <div className="overflow-x-auto">
         <table className="table">
           <thead>

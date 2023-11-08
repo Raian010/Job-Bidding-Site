@@ -49,7 +49,7 @@ const MypostedJobs = () => {
   }, [url]);
 
   return (
-    <div className="my-10">
+    <div className="my-10 min-h-screen">
         <h2 className="text-4xl text-center font-bold mb-10">
         My Posted <span className="text-blue-600">Jobs</span>
       </h2>

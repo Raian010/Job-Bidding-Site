@@ -1,26 +1,35 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
+import { AuthContext } from "../../Provider/Authprovider";
 
 
 const BidRequest = () => {
-  const datas = useLoaderData();
-  const data = datas[0];
-  const { buyer,email } = data;
-  console.log(data);
+
+  const {user} = useContext(AuthContext);
+  console.log(user);
+
+  // const datas = useLoaderData();
+  // const data = datas[0];
+  // const { buyer } = data;
+  // console.log(data);
 
   const [ownerAddedJobs, setOwnerAddedJobs] = useState([]);
   
   const [isLoading,setIsLoading] = useState(true);
 
-  const url = `https://assignment-react-server.vercel.app/bids?email=${buyer}`;
+  const url = `https://assignment-react-server.vercel.app/bids`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => setOwnerAddedJobs(data));
-      setIsLoading(false)
-  }, [url]);
+      .then((data) => {
+        const userBids = data.filter(bid => bid.buyer === user?.email);
+        setOwnerAddedJobs(userBids);
+        console.log(userBids);
+        setIsLoading(false);
+      });
+  }, [url,user]);
 
 
   const handleAccept = (_id) => {

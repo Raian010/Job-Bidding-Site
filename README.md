@@ -1,8 +1,16 @@
-# React + Vite
+## Career Nest
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Website Link
 
-Currently, two official plugins are available:
+https://assignment-eleven-client-fc371.web.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Five Features of this project
+-With add job page anyone can add thier jobs for the employees.
+
+-He/she can bid on any job, without his/her posted jobs.
+
+-He/she can see bid requests of the clients in his/her bid request page.
+
+-Owner can manage employees bid in bids request page.He/she can accept or reject employees bids.
+
+-Owner can delete or update his/her jobs.Only the owner can do this.
