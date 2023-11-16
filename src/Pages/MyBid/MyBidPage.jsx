@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/Authprovider";
+import { Helmet } from "react-helmet-async";
 
 
 const MyBidPage = () => {
@@ -43,6 +44,9 @@ const MyBidPage = () => {
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+                <title>CareerNest || MyBids</title>
+            </Helmet>
       <h2 className="text-4xl text-center font-bold mb-10">
         My <span className="text-blue-600">Bid</span>
       </h2>

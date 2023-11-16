@@ -3,6 +3,7 @@ import { useState } from "react";
 
 // import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Provider/Authprovider";
+import { Helmet } from "react-helmet-async";
 
 
 const BidRequest = () => {
@@ -78,6 +79,9 @@ const BidRequest = () => {
 
   return (
     <div className="min-h-screen mt-10">
+      <Helmet>
+                <title>CareerNest || Bid Request</title>
+            </Helmet>
       <h2 className="text-4xl text-center font-bold mb-10">
         Bid <span className="text-blue-600">Request</span>
       </h2>

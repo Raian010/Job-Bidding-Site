@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/Authprovider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaGoogle } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const {login,googleSIgn} = useContext(AuthContext);
@@ -50,6 +51,9 @@ const Login = () => {
    }
     return (
       <div className="my-10">
+        <Helmet>
+                <title>CareerNest || Login</title>
+            </Helmet>
       <div className="min-h-screen flex flex-col-reverse lg:flex-row justify-center gap-10 items-center">
         <Lottie className="h-[500px]" animationData={animationData}></Lottie>
 

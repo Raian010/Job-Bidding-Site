@@ -5,6 +5,7 @@ import { AuthContext } from "../../Provider/Authprovider";
 import { updateProfile } from "firebase/auth";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
   const { signUp } = useContext(AuthContext);
@@ -59,6 +60,9 @@ const Register = () => {
 
   return (
     <div className="mb-10">
+      <Helmet>
+                <title>CareerNest || Register</title>
+            </Helmet>
       <div className="min-h-screen flex flex-col-reverse lg:flex-row justify-center gap-10 items-center">
         <Lottie className="h-[500px]" animationData={animationData}></Lottie>
 

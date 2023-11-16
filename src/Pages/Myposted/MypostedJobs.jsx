@@ -3,6 +3,7 @@ import { AuthContext } from "../../Provider/Authprovider";
 import axios from "axios";
 import PostedJob from "./postedJob";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MypostedJobs = () => {
   const { user } = useContext(AuthContext);
@@ -50,6 +51,9 @@ const MypostedJobs = () => {
 
   return (
     <div className="my-10 min-h-screen">
+      <Helmet>
+                <title>CareerNest || My Posted</title>
+            </Helmet>
         <h2 className="text-4xl text-center font-bold mb-10">
         My Posted <span className="text-blue-600">Jobs</span>
       </h2>

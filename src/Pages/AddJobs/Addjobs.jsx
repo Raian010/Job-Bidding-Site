@@ -3,6 +3,7 @@ import { AuthContext } from "../../Provider/Authprovider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Addjobs = () => {
   const [selected, setSelected] = useState("");
@@ -47,6 +48,9 @@ const Addjobs = () => {
   };
   return (
     <div className="my-10">
+      <Helmet>
+                <title>CareerNest || Add Jobs</title>
+            </Helmet>
       <h2 className="text-3xl font-bold text-center">
         Add <span className="text-blue-600">Jobs</span>
       </h2>

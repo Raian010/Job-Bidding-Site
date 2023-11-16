@@ -18,6 +18,8 @@ import BidForm from "./Pages/BidForm/BidForm";
 import MyBidPage from "./Pages/MyBid/MyBidPage";
 import BidRequest from "./Pages/BidRequest/BidRequest";
 
+import { HelmetProvider } from 'react-helmet-async';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -101,8 +103,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <HelmetProvider>
     <Authprovider>
       <RouterProvider router={router}></RouterProvider>
     </Authprovider>
+    </HelmetProvider>
   </React.StrictMode>
 );
