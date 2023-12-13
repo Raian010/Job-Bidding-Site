@@ -51,9 +51,9 @@ const Login = () => {
    }
     return (
       <div className="my-10">
-        <Helmet>
+        {/* <Helmet>
                 <title>CareerNest || Login</title>
-            </Helmet>
+            </Helmet> */}
       <div className="min-h-screen flex flex-col-reverse lg:flex-row justify-center gap-10 items-center">
         <Lottie className="h-[500px]" animationData={animationData}></Lottie>
 
