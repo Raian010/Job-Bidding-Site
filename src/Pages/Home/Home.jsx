@@ -5,6 +5,7 @@ import BarChartComponent from "./BarChart";
 import CategoryTabs from "./CategoryTabs";
 
 import Reviews from "./Reviews";
+import Progress from "./Progress";
 
 
 
@@ -18,6 +19,7 @@ const Home = () => {
            <CategoryTabs></CategoryTabs>
            <BarChartComponent></BarChartComponent>
            <Achievments></Achievments>
+        <Progress></Progress>
            <Reviews></Reviews>
         </div>
     );
